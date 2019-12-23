@@ -60,6 +60,26 @@ namespace Vezba_Selenium_Cas_30
             this.DoWait(3);
         }
 
+        [Test]
+        public void Zadatak2Test()
+        {
+            this.NavigateTo("http://shop.qa.rs/");
+            IWebElement kolicina = this.FindElement(By.XPath("//h3[contains(text(),'PRO')]/parent::div/following-sibling::div[1]//select"));
+            var select = new SelectElement(kolicina);
+            select.SelectByValue("10");
+            this.DoWait(1);
+            IWebElement order = this.FindElement(By.XPath("//h3[contains(text(),'PRO')]/parent::div/following-sibling::div[1]//input[@type='submit']"));
+            order.Click();
+
+            int qty = Convert.ToInt32(this.FindElement(By.XPath("(//table//td)[2]")).Text);
+            int price = Convert.ToInt32(this.FindElement(By.XPath("(//table//td)[3]")).Text.Substring(1));
+            int subtotal = Convert.ToInt32(this.FindElement(By.XPath("(//table//td)[4]")).Text.Substring(1));
+
+            Assert.AreEqual(qty * price, subtotal);
+
+            this.DoWait(3);
+        }
+
         [SetUp]
     public void SetUpTests()
     {
