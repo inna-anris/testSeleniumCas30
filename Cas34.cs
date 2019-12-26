@@ -11,6 +11,30 @@ namespace Vezba_Selenium_Cas_30
     {
 
         [Test]
+        public void QaRsTest()
+        {
+            this.NavigateTo("http://shop.qa.rs/");
+            IWebElement kolicina = this.FindElement(By.XPath("//h3[contains(text(),'SMALL')]/parent::div/following-sibling::div[1]//select"));
+            var select = new SelectElement(kolicina);
+            select.SelectByValue("6");
+            int ocekivanaCena = Convert.ToInt32(this.FindElement(By.XPath("//h3[contains(text(),'SMALL')]/parent::div/following-sibling::div[2]")).Text.Substring(1));
+            this.DoWait(1);
+            IWebElement order = this.FindElement(By.XPath("//h3[contains(text(),'SMALL')]/parent::div/following-sibling::div[1]//input[@type='submit']"));
+            order.Click();
+              
+            int qty = Convert.ToInt32(this.FindElement(By.XPath("(//table//td)[2]")).Text);
+            int price = Convert.ToInt32(this.FindElement(By.XPath("(//table//td)[3]")).Text.Substring(1));
+            int subtotal = Convert.ToInt32(this.FindElement(By.XPath("(//table//td)[4]")).Text.Substring(1));
+            
+            Assert.AreEqual(ocekivanaCena, price);
+            
+            Assert.AreEqual(subtotal, qty * price);
+
+            this.DoWait(3);
+            this.DoWait(1);
+        }
+
+        [Test]
         public void EmmiMonitori()
         {
             this.NavigateTo("https://www.emmi.rs/");
