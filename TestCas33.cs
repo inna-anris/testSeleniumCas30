@@ -81,15 +81,15 @@ namespace Vezba_Selenium_Cas_30
         }
 
         [SetUp]
-    public void SetUpTests()
-    {
-        this.Driver = new FirefoxDriver();
-    }
+        public void SetUpTests()
+        {
+            this.Driver = new FirefoxDriver();
+        }
 
-    [TearDown]
-    public void TearDownTests()
-    {
-        this.Close();
+        [TearDown]
+        public void TearDownTests()
+        {
+            this.Close();
+        }
     }
-}
 }
