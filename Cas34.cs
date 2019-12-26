@@ -30,7 +30,6 @@ namespace Vezba_Selenium_Cas_30
             
             Assert.AreEqual(subtotal, qty * price);
 
-            this.DoWait(3);
             this.DoWait(1);
         }
 
